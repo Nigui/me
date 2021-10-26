@@ -31,6 +31,8 @@
     "typescript": "^4.0.0"
   },
   "dependencies": {
-    "sirv-cli": "^1.0.0"
+    "postcss-import": "^14.0.2",
+    "sirv-cli": "^1.0.0",
+    "svelte-remixicon": "^1.0.0"
   }
 }

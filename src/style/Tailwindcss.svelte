@@ -1,4 +1,4 @@
-<style global>
+<style global lang="postcss">
   @import "tailwindcss/base";
   @import "tailwindcss/components";
   @import "tailwindcss/utilities";
@@ -13,9 +13,6 @@
   body {
     margin: 0;
     box-sizing: border-box;
-    font-family: "Inter", sans-serif, -apple-system, BlinkMacSystemFont,
-      "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue",
-      sans-serif;
     color: white;
   }
 
@@ -68,6 +65,18 @@
   }
 
   h1 {
-    font-size: 4rem;
+    @apply text-5xl;
+  }
+
+  h2 {
+    @apply text-2xl;
+  }
+
+  h3 {
+    @apply text-xl;
+  }
+
+  .circled-icon {
+    @apply rounded-full border-2 border-white text-5xl p-2;
   }
 </style>
