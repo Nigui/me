@@ -1,7 +1,7 @@
 module.exports = {
   purge: {
     enabled: !process.env.ROLLUP_WATCH,
-    content: ["./public/index.html", "./src/**/*.svelte"],
+    content: ["./public/index.html", "./src/**/*.svelte", "./src/**/*.html"],
     options: {
       defaultExtractor: (content) => [
         ...(content.match(/[^<>"'`\s]*[^<>"'`\s:]/g) || []),
@@ -11,12 +11,13 @@ module.exports = {
   },
   darkMode: false, // or 'media' or 'class'
   theme: {
-    colors: {
-      transparent: "transparent",
-      current: "currentColor",
-      background: "#101010",
+    extend: {
+      colors: {
+        transparent: "transparent",
+        current: "currentColor",
+        background: "#101010",
+      },
     },
-    extend: {},
   },
   variants: {
     extend: {},
