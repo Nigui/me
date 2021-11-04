@@ -30,8 +30,8 @@
         icon="eva-twitter-outline"
         link="https://twitter.com/GuiillaumeN"
       />
-      <!-- <CircledBtn icon="eva-email-outline" link="mailto:" />
-      <CircledBtn icon="eva-file-text-outline" /> -->
+      <CircledBtn icon="eva-email-outline" link="mailto:contact@nigui.fr" />
+      <!-- <CircledBtn icon="eva-file-text-outline" /> -->
     </div>
   </q-page>
 </template>
