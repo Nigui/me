@@ -3,8 +3,12 @@ const colors = require("tailwindcss/colors");
 module.exports = {
   mode: "jit",
   purge: {
-    enabled: !process.env.ROLLUP_WATCH,
-    content: ["./public/index.html", "./src/**/*.{svelte,ts,js,html}"],
+    enabled: true,
+    content: [
+      "./public/index.html",
+      "./src/**/*.{svelte,ts,js,html}",
+      "./src/*.{svelte,ts,js,html}",
+    ],
     options: {
       defaultExtractor: (content) => [
         ...(content.match(/[^<>"'`\s]*[^<>"'`\s:]/g) || []),
@@ -14,13 +18,13 @@ module.exports = {
   },
   darkMode: false, // or 'media' or 'class'
   theme: {
+    colors: {
+      ...colors,
+      transparent: "transparent",
+      current: "currentColor",
+      background: "#101010",
+    },
     extend: {
-      colors: {
-        ...colors,
-        transparent: "transparent",
-        current: "currentColor",
-        background: "#101010",
-      },
       fontFamily: {
         sans: [
           "Inter",

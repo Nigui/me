@@ -1,16 +1,36 @@
-<script>
+<script lang="ts">
   import {
     GithubLine,
     TwitterLine,
     MailLine,
     FileUserLine,
   } from "svelte-remixicon";
+  import CircledButton from "../components/CircledButton.svelte";
+
+  function open(type: string): () => void {
+    let url = "";
+    switch (type) {
+      case "github":
+        url = "https://github.com/nigui";
+        break;
+      case "twitter":
+        url = "https://twitter.com/GuiillaumeN";
+        break;
+      case "mail":
+        url = "mailto:guin56@gmail.com";
+        break;
+      case "resume":
+        url = "";
+        break;
+    }
+    return () => window.open(url);
+  }
 </script>
 
 <div class="flex-grow flex flex-col justify-center items-center text-center">
   <h1 class="font-black">Hello world _</h1>
   <img
-    src="../assets/img/profile-pic.png"
+    src="assets/img/profile-pic.png"
     alt="profile-pic"
     class="rounded-full w-40 border-4 border-white my-6"
   />
@@ -36,9 +56,17 @@
     graduation. I like to share my knowledge and enhance productivity
   </p>
   <div class="flex flex-row gap-x-4">
-    <GithubLine class="circled-icon" />
-    <TwitterLine class="circled-icon" />
-    <MailLine class="circled-icon" />
-    <FileUserLine class="circled-icon" />
+    <CircledButton on:click={open("github")}>
+      <GithubLine />
+    </CircledButton>
+    <CircledButton on:click={open("twitter")}>
+      <TwitterLine />
+    </CircledButton>
+    <CircledButton on:click={open("mail")}>
+      <MailLine />
+    </CircledButton>
+    <CircledButton on:click={open("resume")}>
+      <FileUserLine />
+    </CircledButton>
   </div>
 </div>
