@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex column items-center justify-center q-pa-md text-center">
-    <ProfilePic class="q-my-md" src="img/profile-pic.png" />
+    <ProfilePic class="q-my-md" src="img/profile-pic.webp" />
 
     <div class="text-h6 text-weight-bold">I'm</div>
     <div

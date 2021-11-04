@@ -6,6 +6,7 @@
     color="white"
     :size="size"
     @click="onClick"
+    :aria-label="icon"
   />
 </template>
 
