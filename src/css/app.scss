@@ -1,4 +1,8 @@
 // app global css in SCSS form
+@import './responsive.scss';
+@import './border-animation.scss';
+@import './utilities.scss';
+@import './bg-clip.scss';
 
 html,
 body {
@@ -11,5 +15,9 @@ body {
 }
 
 .line-height-none {
-  line-height: 0;
+  line-height: 1em;
+}
+
+.rounded {
+  border-radius: 50%;
 }

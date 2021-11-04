@@ -1,0 +1,33 @@
+@mixin bg-gradient-modern($color1, $color2, $color3) {
+  background: linear-gradient(-45deg, $color1, $color2, $color3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 400% 400%;
+  animation: gradient 5s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 100% 50%;
+  }
+  50% {
+    background-position: 0% 50%;
+  }
+  75% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.bg-clip-red {
+  @include bg-gradient-modern($yellow, $red, $pink);
+}
+
+.bg-clip-blue {
+  @include bg-gradient-modern($pink, $cyan, $green-12);
+}

@@ -1,96 +1,51 @@
 <template>
   <q-page class="flex column items-center justify-center q-pa-md text-center">
-    <div class="text-h3 text-weight-bolder">Hello world _</div>
-    <q-avatar class="q-my-md" size="132px">
-      <img src="~assets/profile-pic.png" alt="profile pic" />
-    </q-avatar>
+    <ProfilePic class="q-my-md" src="img/profile-pic2.png" />
 
-    <span class="text-h6 text-weight-bold">I'm</span><br />
-    <span class="text-h3 text-weight-bolder text-uppercase line-height-none"
-      >Guillaume</span
-    ><br />
-    <span class="text-h5 text-weight-regular text-uppercase"
-      >Web Developer<br />
-      & UX/UI Designer<br
-    /></span>
-    <span class="text-body1 text-weight-light"
-      >📍Nantes, FRANCE 🇫🇷 <br />
-      and around the 🌍 from 🏠</span
+    <div class="text-h6 text-weight-bold">I'm</div>
+    <div
+      class="text-h3 text-weight-bolder text-uppercase line-height-none q-my-sm"
     >
+      Guillaume
+    </div>
+    <div class="text-h5 text-weight-bolder text-uppercase q-mb-md">
+      <div class="bg-clip-blue">Web Developer</div>
+
+      <div>& <span class="bg-clip-red">UX/UI Designer</span></div>
+    </div>
+    <div class="text-body1 text-weight-light">
+      <div>📍Nantes, FRANCE 🇫🇷</div>
+      <div>and around the 🌍 from 🏠</div>
+    </div>
 
     <div class="q-my-md max-w-450px text-body1">
       I love design then build products. I’m experienced in mobile and web
-      development and worked in blockchain and decentralized world since my
+      development. I worked in blockchain and decentralized world since my
       graduation. I like to share my knowledge and enhance productivity
     </div>
 
-    <div class="flex row q-gutter-x-sm">
-      <q-btn
-        icon="mail"
-        round
-        outline
-        color="white"
-        size="lg"
-        @click="open('mail')"
+    <div class="flex row q-gutter-x-md">
+      <CircledBtn icon="eva-github-outline" link="https://github.com/nigui" />
+      <CircledBtn
+        icon="eva-twitter-outline"
+        link="https://twitter.com/GuiillaumeN"
       />
-      <q-btn
-        icon="mail"
-        round
-        outline
-        color="white"
-        size="lg"
-        @click="open('mail')"
-      />
-      <q-btn
-        icon="mail"
-        round
-        outline
-        color="white"
-        size="lg"
-        @click="open('mail')"
-      />
-      <q-btn
-        icon="mail"
-        round
-        outline
-        color="white"
-        size="lg"
-        @click="open('mail')"
-      />
+      <!-- <CircledBtn icon="eva-email-outline" link="mailto:" />
+      <CircledBtn icon="eva-file-text-outline" /> -->
     </div>
   </q-page>
 </template>
 
 <script lang="ts">
-import { openURL } from 'quasar';
 import { defineComponent } from 'vue';
+import ProfilePic from 'components/ProfilePic.vue';
+import CircledBtn from 'components/CircledBtn.vue';
 
 export default defineComponent({
   name: 'Home',
-  methods: {
-    open(type: string) {
-      let url = '';
-      switch (type) {
-        case 'github':
-          url = 'https://github.com/nigui';
-          break;
-        case 'twitter':
-          url = 'https://twitter.com/GuiillaumeN';
-          break;
-        case 'mail':
-          url = 'mailto:guin56@gmail.com';
-          break;
-        case 'resume':
-          url = '';
-          break;
-      }
-      return openURL(url);
-    },
+  components: {
+    ProfilePic,
+    CircledBtn,
   },
 });
 </script>
-<style scoped>
-.max-w-450px {
-  max-width: 450px;
-}
-</style>
