@@ -64,7 +64,7 @@ export default defineComponent({
   "en":{
     "prename": "I'm",
     "developer": "Web Developer",
-    "designer": "UX/UI Designer",
+    "designer": "UX/UI lover",
     "location": {
       "row1":"📍 Nantes, FRANCE 🇫🇷",
       "row2": "and around the 🌍 from 🏠",
@@ -74,7 +74,7 @@ export default defineComponent({
   "fr":{
     "prename": "Moi c'est",
     "developer": "Développeur Web",
-    "designer": "Designer UX/UI",
+    "designer": "UX/UI lover",
     "location": {
       "row1":"📍 Nantes, FRANCE 🇫🇷",
       "row2": "et à l'international 🌍 depuis la 🏠",

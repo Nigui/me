@@ -9,6 +9,8 @@
             icon="eva-menu-outline"
             active-icon="eva-close-outline"
             direction="up"
+            label="toggle menu"
+            :hide-label="true"
           >
             <q-fab-action
               label="fr"
