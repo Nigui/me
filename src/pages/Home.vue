@@ -1,5 +1,5 @@
 <template>
-  <q-page class="flex column items-center justify-center q-pa-md text-center">
+  <div class="fit flex column items-center justify-center q-pa-md text-center">
     <AnimateGroup show="fadeIn" hide="fadeOut">
       <ProfilePic key="pp" class="q-my-md" src="img/profile-pic.webp" />
 
@@ -42,7 +42,7 @@
         <!-- <CircledBtn icon="eva-file-text-outline" /> -->
       </div>
     </AnimateGroup>
-  </q-page>
+  </div>
 </template>
 
 <script lang="ts">
