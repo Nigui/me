@@ -1,5 +1,16 @@
-import enUS from './en-US';
-
 export default {
-  en: enUS,
+  en: {
+    pages: {
+      skills: {
+        title: 'My Skills _',
+      },
+    },
+  },
+  fr: {
+    pages: {
+      skills: {
+        title: 'Mes compétences _',
+      },
+    },
+  },
 };

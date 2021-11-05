@@ -1,62 +1,35 @@
 <template>
   <q-layout view="hHh LpR fFf">
+    <Header v-if="headerConfig" :config="headerConfig" />
     <q-page-container>
       <q-page class="fullscreen">
-        <router-view />
-
-        <q-page-sticky position="bottom-right" :offset="[18, 18]">
-          <q-fab
-            icon="eva-menu-outline"
-            active-icon="eva-close-outline"
-            direction="up"
-            label="toggle menu"
-            :hide-label="true"
-          >
-            <q-fab-action
-              label="fr"
-              @click="updateLocale('fr')"
-              :icon="`img:${image('fr')}`"
-              :outline="current === 'fr'"
-            />
-            <q-fab-action
-              label="en"
-              @click="updateLocale('en')"
-              :icon="`img:${image('en')}`"
-              :outline="current === 'en'"
-            />
-          </q-fab>
-        </q-page-sticky>
+        <router-view v-slot="{ Component }">
+          <component ref="page" :is="Component" />
+        </router-view>
+        <Menu />
+        <BackBtn v-if="showBackBtn" />
       </q-page>
     </q-page-container>
   </q-layout>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, defineAsyncComponent } from 'vue';
 
 export default defineComponent({
   name: 'MainLayout',
-
-  computed: {
-    current(): string {
-      return this.$i18n.locale;
-    },
+  components: {
+    Menu: defineAsyncComponent(() => import('components/Menu.vue')),
+    Header: defineAsyncComponent(() => import('components/Header.vue')),
+    BackBtn: defineAsyncComponent(() => import('components/BackBtn.vue')),
   },
-
-  methods: {
-    updateLocale(lang: string): void {
-      this.$i18n.locale = lang;
+  computed: {
+    headerConfig() {
+      return this.$route.name;
     },
-
-    /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
-    image(lang: string): any {
-      return require(`src/assets/flags/${lang}.svg`);
+    showBackBtn() {
+      return this.$route.meta.back;
     },
   },
 });
 </script>
-<style scoped lang="scss">
-.q-btn {
-  background-color: $background !important;
-}
-</style>
