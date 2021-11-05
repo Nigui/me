@@ -46,17 +46,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import ProfilePic from 'components/ProfilePic.vue';
-import CircledBtn from 'components/CircledBtn.vue';
-import AnimateGroup from 'src/components/animations/AnimateGroup.vue';
+import { defineComponent, defineAsyncComponent } from 'vue';
 
 export default defineComponent({
   name: 'Home',
   components: {
-    ProfilePic,
-    CircledBtn,
-    AnimateGroup,
+    ProfilePic: defineAsyncComponent(() => import('components/ProfilePic.vue')),
+    CircledBtn: defineAsyncComponent(() => import('components/CircledBtn.vue')),
+    AnimateGroup: defineAsyncComponent(
+      () => import('components/animations/AnimateGroup.vue')
+    ),
   },
 });
 </script>
