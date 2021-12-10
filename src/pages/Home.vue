@@ -1,5 +1,5 @@
 <template>
-  <div class="fit flex column items-center justify-center q-pa-md text-center">
+  <div class="flex column justify-center items-center q-pa-md text-center">
     <AnimateGroup show="fadeIn" hide="fadeOut">
       <ProfilePic key="pp" class="q-my-md" src="img/profile-pic.webp" />
 

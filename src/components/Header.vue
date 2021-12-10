@@ -1,5 +1,5 @@
 <template>
-  <q-header elevated>
+  <q-header>
     <q-toolbar class="bg-background q-py-md">
       <ProfilePic src="img/profile-pic.webp" size="40px" />
       <q-toolbar-title class="text-weight-bolder">{{
