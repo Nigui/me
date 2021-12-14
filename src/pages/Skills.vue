@@ -3,20 +3,24 @@
     <div
       class="col-grow flex justify-center content-center q-gutter-md pt-header"
     >
-      <div
-        v-for="{ name, color } of filteredSkills"
-        :key="name"
-        class="skill flex column items-center justify-center"
-        :style="{ backgroundColor: `#${color}5f` }"
+      <transition-group
+        appear
+        enter-active-class="animated zoomIn "
+        leave-active-class="animated zoomOut"
       >
-        <q-img :src="skillImg(name)" :alt="`skill ${name}`" />
-      </div>
+        <SkillBtn
+          v-for="{ name } of filteredSkills"
+          :key="name"
+          :name="name"
+          @click="openSkill(name)"
+        />
+      </transition-group>
     </div>
 
     <q-page-sticky expand position="top" class="page-tabs">
       <div class="flex justify-center q-gutter-sm q-pa-md">
         <q-btn
-          v-for="{ name, color } of skillTypes"
+          v-for="{ name, color } of skillTypesOpts"
           :key="name"
           class="q-px-lg q-py-sm"
           :label="$t(`skills.${name}`)"
@@ -31,92 +35,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, Ref } from 'vue';
-
-type Skill = {
-  type: SkillType;
-  name: string;
-  color: string;
-};
-enum SkillType {
-  Webdev = 'webdev',
-  Blockchain = 'blockchain',
-  UX = 'ux',
-  Project = 'project',
-  Devops = 'devops',
-}
+import { defineComponent, ref, Ref, defineAsyncComponent } from 'vue';
+import SkillDialog from '../components/SkillDialog.vue';
+import { skills, Skill, SkillType, skillTypes } from 'src/models/skills';
 
 export default defineComponent({
   name: 'Skills',
+  components: {
+    SkillBtn: defineAsyncComponent(() => import('components/SkillBtn.vue')),
+  },
   setup() {
-    const skills: Skill[] = [
-      // Webdev
-      ...[
-        { name: 'quasar', color: '21A5FF' },
-        { name: 'pwa', color: '4300BE' },
-        { name: 'vuejs', color: '40AB6D' },
-        { name: 'nodejs', color: '80BB00' },
-        { name: 'nestjs', color: 'DC0735' },
-        { name: 'postgres', color: '29547F' },
-        { name: 'webpack', color: '80CCFA' },
-        { name: 'mongodb', color: '428E35' },
-        { name: 'jwt', color: 'C216FF' },
-        { name: 'web3', color: 'ffffff' },
-        { name: 'oidc', color: 'EF7F0C' },
-        { name: 'cas', color: '085d9f' },
-        { name: 'springboot', color: '61A52A' },
-        { name: 'android', color: '41DA6D' },
-        { name: 'react', color: '4CB4D7' },
-        { name: 'woocommerce', color: '6840A6' },
-        { name: 'wordpress', color: '1774B2' },
-      ].map((s) => ({ ...s, type: SkillType.Webdev })),
-
-      // Blockchain
-      ...[
-        { name: 'ethereum', color: '4F68E9' },
-        { name: 'solidity', color: '50557B' },
-        { name: 'nft', color: '42C096' },
-        { name: 'smartcontract', color: 'ffffff' },
-        { name: 'ark', color: 'B61321' },
-      ].map((s) => ({ ...s, type: SkillType.Blockchain })),
-
-      // Devops
-      ...[
-        { name: 'docker', color: '2583EB' },
-        { name: 'terraform', color: '492BE9' },
-        { name: 'dns', color: 'ABD4FF' },
-        { name: 'scaleway', color: '3D008A' },
-        { name: 'clevercloud', color: 'C8353D' },
-        { name: 'netlify', color: '33BCA9' },
-        { name: 'circleci', color: 'ffffff' },
-        { name: 'github', color: 'ffffff' },
-      ].map((s) => ({ ...s, type: SkillType.Devops })),
-
-      // project
-      ...[
-        { name: 'scrum', color: '248AA7' },
-        { name: 'kanban', color: '34DCBC' },
-        { name: 'targetprocess', color: 'E9B900' },
-      ].map((s) => ({ ...s, type: SkillType.Project })),
-
-      // UXUI
-      ...[
-        { name: 'figma', color: '2FC86E' },
-        { name: 'pixelmator', color: 'E88F11' },
-        { name: 'canva', color: '30B4BC' },
-        { name: 'illustrator', color: 'F88600' },
-        { name: 'photoshop', color: '2F97FF' },
-        { name: 'wireframe', color: 'ffffff' },
-      ].map((s) => ({ ...s, type: SkillType.UX })),
-    ];
-    const skillTypes: { name: SkillType; color: string }[] = [
-      { name: SkillType.Webdev, color: 'light-blue' },
-      { name: SkillType.Blockchain, color: 'red' },
-      { name: SkillType.UX, color: 'purple' },
-      { name: SkillType.Project, color: 'amber' },
-      { name: SkillType.Devops, color: 'green' },
-    ];
-
     const selectedTypes: Ref<SkillType[]> = ref([]);
 
     const selectSkillType = (type: SkillType) => {
@@ -129,9 +57,10 @@ export default defineComponent({
       return selectedTypes.value.includes(type);
     };
 
+    const skillTypesOpts = Object.values(skillTypes);
+
     return {
-      skills,
-      skillTypes,
+      skillTypesOpts,
       selectedTypes,
       selectSkillType,
       isSelectedSkillType,
@@ -139,32 +68,31 @@ export default defineComponent({
   },
   computed: {
     filteredSkills(): Skill[] {
-      let skills = this.skills;
+      let fSkills = Object.values(skills);
       if (this.selectedTypes.length > 0) {
-        skills = skills.filter(({ type }) => this.selectedTypes.includes(type));
+        fSkills = fSkills.filter(({ type }) =>
+          this.selectedTypes.includes(type)
+        );
       }
-      return skills;
+      return fSkills;
     },
   },
   methods: {
-    /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
-    skillImg(skillName: string): any {
-      return require(`src/assets/skills/${skillName}.webp`);
+    openSkill(skillName: string): void {
+      this.$q.dialog({
+        component: SkillDialog,
+        componentProps: {
+          name: skillName,
+        },
+      });
     },
   },
 });
 </script>
 <style lang="scss" scoped>
-.skill {
-  width: 80px;
-  height: 80px;
-  padding: 15px;
-  border-radius: 50%;
-}
-
 .page-tabs {
   height: 80px;
-  background: linear-gradient(180deg, #101010 0%, #101010 85%, #10101000 100%);
+  background: linear-gradient(180deg, #101010 0%, #101010 90%, #10101000 100%);
 
   @media (max-width: 600px) {
     height: 120px;
