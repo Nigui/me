@@ -39,7 +39,7 @@
           link="https://twitter.com/GuiillaumeN"
         />
         <CircledBtn icon="eva-email-outline" link="mailto:contact@nigui.fr" />
-        <CircledBtn icon="eva-file-text-outline" link="/resume-1.0.0.pdf" />
+        <CircledBtn icon="eva-file-text-outline" link="/resume-1.1.0.pdf" />
       </div>
     </AnimateGroup>
   </div>
